@@ -43,7 +43,9 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	fmt.Println(users)
+	fmt.Println("GET recieved")
+
+	json.NewEncoder(w).Encode(users)
 }
 
 func info() {
