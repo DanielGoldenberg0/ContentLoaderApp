@@ -1,0 +1,34 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 5px 2px 0 2px;
+}
+
+button {
+    background-color: rgb(184, 184, 184);
+    font-size: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: rgb(205, 205, 205);
+    cursor: pointer;
+}
+
+#title {
+    color: rgb(35, 35, 35);
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.user-box {
+    background-color: rgb(184, 184, 184);
+    color: rgb(35, 35, 35);
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+}
