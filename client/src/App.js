@@ -12,8 +12,10 @@ class App extends React.Component {
     var response = await fetch(url)
     var users = await response.json()
     this.setState({
-      user: users[0]
+      user: users[0],
+      loading: false
     })
+    console.log(users)
   }
 
   render() {
