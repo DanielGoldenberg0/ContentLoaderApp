@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -10,13 +11,20 @@ import (
 
 var path string = "data.json"
 
+// User represents a user
+type User struct {
+	Username string `json:"username"`
+	Email    string `json:"email"`
+	ID       string `json:"id"`
+}
+
 func main() {
+	info()
+
 	r := mux.NewRouter()
 	r.HandleFunc("/api/load", loadUsers).Methods("GET")
 
 	http.ListenAndServe(":8080", r)
-
-	info()
 }
 
 func loadUsers(w http.ResponseWriter, r *http.Request) {
@@ -28,7 +36,14 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 
-	fmt.Println(data[0])
+	var users []User
+
+	err = json.Unmarshal(data, &users)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(users)
 }
 
 func info() {
