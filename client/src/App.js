@@ -29,10 +29,11 @@ class App extends React.Component {
         <h1 id="title">Content Loader</h1>
         <button onClick={() => this.loadUsers()}>Load</button>
         {
-          clicked ?
+          clicked 
+          ?
             !this.state.loading && this.state.user
             ? 
-              users.map(user => <User username={user.username} email={user.email} id={user.id}/>)
+              users.map(user => <User username={user["username"]} email={user["email"]} id={user["id"]}/>)
             :
               <h1>Error</h1>
           :
