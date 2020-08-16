@@ -13,13 +13,13 @@ class App extends React.Component {
   async loadUsers() {
     var url = "http://localhost:8080/api/load"
     var response = await fetch(url)
-    users = await response.json()
 
+    users = await response.json()
     clicked = true;
 
     this.setState({
-      user: users[0],
       loading: false,
+      user: users[0]
     })
   }
 
