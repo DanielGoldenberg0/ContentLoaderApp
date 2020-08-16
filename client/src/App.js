@@ -1,6 +1,9 @@
 import React from 'react'
 import User from "./components/User.js"
 
+var users
+var clicked = false
+
 class App extends React.Component {
   state = {
     loading: true,
@@ -10,12 +13,14 @@ class App extends React.Component {
   async loadUsers() {
     var url = "http://localhost:8080/api/load"
     var response = await fetch(url)
-    var users = await response.json()
+    users = await response.json()
+
+    clicked = true;
+
     this.setState({
       user: users[0],
-      loading: false
+      loading: false,
     })
-    console.log(users)
   }
 
   render() {
@@ -23,9 +28,16 @@ class App extends React.Component {
       <div className="container">
         <h1 id="title">Content Loader</h1>
         <button onClick={() => this.loadUsers()}>Load</button>
-        {this.state.loading || !this.state.user 
-        ? "" 
-        : <User username={this.state.user.username} email={this.state.user.email} id={this.state.user.id}/>}
+        {
+          clicked ?
+            !this.state.loading && this.state.user
+            ? 
+              users.map(user => <User username={user.username} email={user.email} id={user.id}/>)
+            :
+              <h1>Error</h1>
+          :
+          ""
+        }
       </div>
     )
   }
