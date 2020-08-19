@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var pathToData string = "data.json"
+var pathToDB string = "db.json"
 
 // User represents a user
 type User struct {
@@ -37,7 +37,7 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data, err := ioutil.ReadFile("./" + pathToData)
+	data, err := ioutil.ReadFile("./" + pathToDB)
 	if err != nil {
 		fmt.Println(err)
 	}
