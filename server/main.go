@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var path string = "data.json"
+var pathToData string = "data.json"
 
 // User represents a user
 type User struct {
@@ -24,6 +24,12 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/load", loadUsers).Methods("GET")
 
+	buildHandler := http.FileServer(http.Dir("../client/build"))
+	r.PathPrefix("/").Handler(buildHandler)
+
+	staticHandler := http.StripPrefix("/static/", http.FileServer(http.Dir("../client/build/static")))
+	r.PathPrefix("/static/").Handler(staticHandler)
+
 	http.ListenAndServe(":8080", r)
 }
 
@@ -31,7 +37,7 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data, err := ioutil.ReadFile("./" + path)
+	data, err := ioutil.ReadFile("./" + pathToData)
 	if err != nil {
 		fmt.Println(err)
 	}
