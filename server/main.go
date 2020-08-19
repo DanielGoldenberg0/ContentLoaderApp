@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var pathToDB string = "db.json"
+var pathToData string = "content.json"
 
 // User represents a user
 type User struct {
@@ -19,7 +19,10 @@ type User struct {
 }
 
 func main() {
-	info()
+	fmt.Println("The server is active..")
+	fmt.Println(" * Running on http://localhost:8080/")
+	fmt.Println(" * IP: localhost")
+	fmt.Println(" * Port: 8080")
 
 	r := mux.NewRouter()
 	r.HandleFunc("/api/load", loadUsers).Methods("GET")
@@ -37,7 +40,7 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data, err := ioutil.ReadFile("./" + pathToDB)
+	data, err := ioutil.ReadFile("./" + pathToData)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -52,10 +55,4 @@ func loadUsers(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("GET recieved")
 
 	json.NewEncoder(w).Encode(users)
-}
-
-func info() {
-	fmt.Println("The server is active")
-	fmt.Println(" * IP: localhost")
-	fmt.Println(" * Port: 8080")
 }
