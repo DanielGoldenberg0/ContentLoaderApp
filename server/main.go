@@ -19,7 +19,7 @@ type User struct {
 }
 
 func main() {
-	fmt.Println("The server is active..")
+	fmt.Println("The server is active...")
 	fmt.Println(" * Running on http://localhost:8080/")
 	fmt.Println(" * IP: localhost")
 	fmt.Println(" * Port: 8080")
